@@ -20,9 +20,11 @@ public class JdbcMemberRepository implements MemberRepository {
     @Override
     public Member save(Member member) {
         String sql = "insert into member(name) values(?)";
+
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql,
@@ -43,7 +45,7 @@ public class JdbcMemberRepository implements MemberRepository {
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
-            close(conn, pstmt, rs);
+            close(conn, pstmt, rs); //리소스 반환을 반드시 해야 함
         }
     }
 
@@ -53,6 +55,7 @@ public class JdbcMemberRepository implements MemberRepository {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
@@ -79,6 +82,7 @@ public class JdbcMemberRepository implements MemberRepository {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
@@ -104,6 +108,7 @@ public class JdbcMemberRepository implements MemberRepository {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
